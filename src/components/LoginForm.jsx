@@ -33,7 +33,11 @@ export function LoginForm() {
         </label>
         <label>
           Password
-          <Field type="password" name="password" placeholder="password" />
+          <Field
+            type="password"
+            name="password"
+            placeholder="at least 8 symbols"
+          />
           <ErrorMessage name="password" component="div" />
         </label>
         <button type="submit" disabled={isLoading}>

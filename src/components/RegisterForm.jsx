@@ -40,7 +40,11 @@ export function RegisterForm() {
         </label>
         <label>
           Password
-          <Field type="password" name="password" placeholder="password" />
+          <Field
+            type="password"
+            name="password"
+            placeholder="minimum 8 symbols"
+          />
           <ErrorMessage name="password" component="div" />
         </label>
         <button type="submit" disabled={isLoading}>

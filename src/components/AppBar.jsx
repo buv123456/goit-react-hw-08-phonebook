@@ -5,7 +5,6 @@ import { AuthNav } from './AuthNav';
 
 export const AppBar = () => {
   const { isLoggedIn } = useAuth();
-  console.log(isLoggedIn);
   return (
     <header>
       <nav>
