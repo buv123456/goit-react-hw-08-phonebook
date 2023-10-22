@@ -1,15 +1,15 @@
 import { Formik } from 'formik';
 import Spinner from 'react-spinner-material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { LoginSchema } from 'helpers/submitCheck';
 import { logIn } from 'redux/auth/operations';
-import { selectIsLoading } from 'redux/contacts/selectors';
 import {
   BtnForm,
   ErrorMsgStyled,
   FieldStyled,
   FormStyled,
 } from './Forms.styled';
+import { useAuth } from 'hooks/useAuth';
 
 const initialValues = {
   email: '',
@@ -18,7 +18,7 @@ const initialValues = {
 
 export function LoginForm() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
+  const { isLoading } = useAuth();
 
   const handleSubmit = ({ email, password }, { resetForm }) => {
     dispatch(logIn({ email, password }));

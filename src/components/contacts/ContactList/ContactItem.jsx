@@ -8,6 +8,8 @@ import { ButtonItemStyled, ItemInfoStyled } from '..';
 import { createPortal } from 'react-dom';
 import { EditContact } from 'components/EditContact/EditContact';
 
+const modalRoot = document.querySelector('#modal-root');
+
 export function ContactItem({ name, number, id }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -26,16 +28,13 @@ export function ContactItem({ name, number, id }) {
       </ItemInfoStyled>
       <ButtonItemStyled
         type="button"
+        name="edit"
         disabled={isLoading}
         onClick={() => {
           setIsEditing(true);
         }}
       >
-        {isLoading ? (
-          <Spinner radius={18} color={'#777'} stroke={4} visible={true} />
-        ) : (
-          <TbUserEdit size="22px" />
-        )}
+        <TbUserEdit size="22px" />
       </ButtonItemStyled>
       <ButtonItemStyled
         type="button"
@@ -56,7 +55,7 @@ export function ContactItem({ name, number, id }) {
             contact={{ name, number, id }}
             handleClose={() => setIsEditing(false)}
           />,
-          document.body
+          modalRoot
         )}
     </>
   );

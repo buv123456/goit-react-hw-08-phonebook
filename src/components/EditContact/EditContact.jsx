@@ -1,6 +1,9 @@
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { SignupSchema } from 'helpers/submitCheck';
+import { CgCloseO } from 'react-icons/cg';
+import { useEffect } from 'react';
+
+import { ContactSchema } from 'helpers/submitCheck';
 import { editContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 import {
@@ -10,7 +13,6 @@ import {
   FormStyled,
 } from '../Forms/Forms.styled';
 import { ButtonClose, Wrapper } from './EditContact.styled';
-import { CgCloseO } from 'react-icons/cg';
 
 export function EditContact({
   contact: { name: savedName, number: savedNumber, id },
@@ -18,6 +20,24 @@ export function EditContact({
 }) {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+
+  // add possibility closing by ESC
+  useEffect(() => {
+    const handleCloseESC = e => {
+      if (e.code === 'Escape') handleClose();
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleCloseESC);
+    return () => {
+      document.body.style.overflow = 'auto';
+      window.removeEventListener('keydown', handleCloseESC);
+    };
+  }, [handleClose]);
+
+  // closing by click on wrapper
+  const onClose = e => {
+    if (e.target === e.currentTarget) handleClose();
+  };
 
   const handleSubmit = ({ name, number }) => {
     name = name.trim();
@@ -34,15 +54,15 @@ export function EditContact({
     }
   };
   return (
-    <Wrapper>
+    <Wrapper onClick={onClose}>
       <Formik
         initialValues={{ name: savedName, number: savedNumber }}
         onSubmit={handleSubmit}
-        validationSchema={SignupSchema}
+        validationSchema={ContactSchema}
       >
         <FormStyled name="editContact">
           <h3>
-            Editing contact: <span>{savedName}</span>
+            Edit: <span>{savedName}</span>
           </h3>
 
           <label>
@@ -55,7 +75,7 @@ export function EditContact({
             <FieldStyled type="tel" name="number" />
             <ErrorMsgStyled name="number" component="div" />
           </label>
-          <BtnForm type="submit">Edit contact</BtnForm>
+          <BtnForm type="submit">Save contact</BtnForm>
           <ButtonClose type="button" onClick={() => handleClose()}>
             <CgCloseO size="2em" />
           </ButtonClose>

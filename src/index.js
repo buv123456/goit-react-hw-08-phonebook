@@ -9,6 +9,7 @@ import { App } from 'components/App';
 import { GlobalStyle } from 'components/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'theme';
+import { Toaster } from 'react-hot-toast';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -22,5 +23,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </PersistGate>
       <GlobalStyle />
     </Provider>
+    <Toaster position="top-right" reverseOrder={false} gutter={8} />
   </React.StrictMode>
 );

@@ -31,6 +31,7 @@ const contactsSlice = createSlice({
       })
       .addCase(fetchContacts.rejected, (state, { payload }) => {
         ifRejected(state, payload);
+        state.isLoading = false;
       })
       // when we add new contact to db
       .addCase(addContact.pending, state => {
@@ -42,6 +43,7 @@ const contactsSlice = createSlice({
       })
       .addCase(addContact.rejected, (state, { payload }) => {
         ifRejected(state, payload);
+        state.isLoading = false;
       })
       // when delete contact from db
       .addCase(deleteContact.fulfilled, (state, { payload }) => {
@@ -60,6 +62,7 @@ const contactsSlice = createSlice({
       })
       .addCase(editContact.rejected, (state, { payload }) => {
         ifRejected(state, payload);
+        state.isLoading = false;
       });
   },
 });

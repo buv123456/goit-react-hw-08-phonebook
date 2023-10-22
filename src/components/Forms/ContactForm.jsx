@@ -1,8 +1,7 @@
 import { Formik } from 'formik';
 import Spinner from 'react-spinner-material';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
-import { SignupSchema } from 'helpers/submitCheck';
+import { useDispatch } from 'react-redux';
+import { ContactSchema } from 'helpers/submitCheck';
 import { addContact } from 'redux/contacts/operations';
 import {
   BtnForm,
@@ -10,6 +9,7 @@ import {
   FieldStyled,
   FormStyled,
 } from './Forms.styled';
+import { useContact } from 'hooks/useContact';
 
 const initialValues = {
   name: '',
@@ -18,8 +18,7 @@ const initialValues = {
 
 export function ContactForm() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
-  const contacts = useSelector(selectContacts);
+  const { isLoading, contacts } = useContact();
 
   const handleSubmit = ({ name, number }, { resetForm }) => {
     name = name.trim();
@@ -41,7 +40,7 @@ export function ContactForm() {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={SignupSchema}
+      validationSchema={ContactSchema}
     >
       <FormStyled name="contact">
         <label>

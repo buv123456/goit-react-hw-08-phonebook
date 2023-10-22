@@ -1,15 +1,15 @@
 import { Formik } from 'formik';
 import Spinner from 'react-spinner-material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { RegisterSchema } from 'helpers/submitCheck';
 import { register } from 'redux/auth/operations';
-import { selectIsLoading } from 'redux/contacts/selectors';
 import {
   BtnForm,
   ErrorMsgStyled,
   FieldStyled,
   FormStyled,
 } from 'components/Forms/Forms.styled';
+import { useAuth } from 'hooks/useAuth';
 
 const initialValues = {
   name: '',
@@ -19,10 +19,9 @@ const initialValues = {
 
 export function RegisterForm() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsLoading);
+  const { isLoading } = useAuth();
 
   const handleSubmit = ({ name, email, password }, { resetForm }) => {
-    console.log(name, email, password);
     dispatch(register({ name, email, password }));
     resetForm();
   };

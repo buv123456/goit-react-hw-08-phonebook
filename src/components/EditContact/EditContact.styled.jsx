@@ -13,9 +13,7 @@ export const Wrapper = styled.div`
 
   & h3 {
     font-weight: 500;
-
-    /* font-size: 48; */
-    /* text-align: 'center'; */
+    width: 90%;
   }
   & span {
     color: green;

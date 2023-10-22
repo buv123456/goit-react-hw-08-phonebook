@@ -1,9 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import {
-  selectContacts,
-  selectFilteredContacts,
-} from 'redux/contacts/selectors';
 import sorting from 'helpers/sorting';
 import {
   AllContactsStyled,
@@ -13,11 +9,11 @@ import {
   ContactItem,
 } from '..';
 import { fetchContacts } from 'redux/contacts/operations';
+import { useContact } from 'hooks/useContact';
 
 export function ContactList() {
   const dispatch = useDispatch();
-  const contactsAll = useSelector(selectContacts);
-  const contacts = useSelector(selectFilteredContacts);
+  const { contacts, filteredContacts } = useContact();
   const [sortBy, setSortBy] = useState('name');
 
   useEffect(() => {
@@ -31,12 +27,12 @@ export function ContactList() {
   return (
     <>
       <AllContactsStyled>
-        {contactsAll.length} all contacts <br />
-        {contacts.length} filtered contacts
+        {contacts.length} all contacts <br />
+        {fetchContacts.length} filtered contacts
       </AllContactsStyled>
       <SortBox onCheck={handleCheck} sortBy={sortBy} />
       <ListStyled>
-        {sorting(contacts, sortBy).map(({ name, number, id }) => (
+        {sorting(filteredContacts, sortBy).map(({ name, number, id }) => (
           <ListItemStyled key={id}>
             <ContactItem name={name} number={number} id={id} />
           </ListItemStyled>
