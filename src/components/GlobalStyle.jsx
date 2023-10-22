@@ -2,6 +2,7 @@ import 'modern-normalize';
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
+
   body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -19,11 +20,13 @@ code {
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 main {
-  padding: 0 10px 10px;
-}
+  padding: 15px 0;
+   }
+
 ul {
   list-style: none;
 }

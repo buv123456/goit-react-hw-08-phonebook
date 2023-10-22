@@ -2,17 +2,28 @@ import styled from 'styled-components';
 import { ErrorMessage, Field, Form } from 'formik';
 
 export const FormStyled = styled(Form)`
-  gap: 40px;
   width: 600px;
+  height: ${({ name, theme }) => theme.height[name]};
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
   position: relative;
   padding: 20px;
-  background-color: teal;
+  background-color: ${({ theme }) => theme.colors.main};
   border-radius: 10px;
   box-shadow: 5px 5px 10px black;
+
+  & label {
+    font-weight: bold;
+    position: relative;
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+  }
 `;
 
 export const FieldStyled = styled(Field)`
@@ -37,21 +48,11 @@ export const ErrorMsgStyled = styled(ErrorMessage)`
   border-radius: 5px;
 `;
 
-export const LabelStyled = styled.label`
-  position: relative;
-  width: 500px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  gap: 5px;
-`;
-
-export const ButtonStyled = styled.button`
+export const BtnForm = styled.button`
   width: 90%;
   height: 40px;
   font-size: inherit;
-  font-weight: inherit;
+  font-weight: bold;
   text-transform: uppercase;
   display: flex;
   justify-content: center;
@@ -63,10 +64,8 @@ export const ButtonStyled = styled.button`
   &:hover {
     background-color: #02f7f7;
     scale: 1.03;
-    box-shadow: 5px 5px 10px #0000007a;
   }
   &:active {
     scale: 1.01;
-    box-shadow: 3px 3px 10px #000000be;
   }
 `;

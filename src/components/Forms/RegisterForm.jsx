@@ -1,9 +1,15 @@
-import { Formik, ErrorMessage, Field, Form } from 'formik';
+import { Formik } from 'formik';
 import Spinner from 'react-spinner-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { RegisterSchema } from 'helpers/submitCheck';
 import { register } from 'redux/auth/operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
+import {
+  BtnForm,
+  ErrorMsgStyled,
+  FieldStyled,
+  FormStyled,
+} from 'components/Forms/Forms.styled';
 
 const initialValues = {
   name: '',
@@ -27,34 +33,34 @@ export function RegisterForm() {
       onSubmit={handleSubmit}
       validationSchema={RegisterSchema}
     >
-      <Form>
+      <FormStyled name="register">
         <label>
           Name
-          <Field type="text" name="name" placeholder="Enter your name" />
-          <ErrorMessage name="name" component="div" />
+          <FieldStyled type="text" name="name" placeholder="Enter your name" />
+          <ErrorMsgStyled name="name" component="div" />
         </label>
         <label>
           Email
-          <Field type="email" name="email" placeholder="abc@email.com" />
-          <ErrorMessage name="email" component="div" />
+          <FieldStyled type="email" name="email" placeholder="abc@email.com" />
+          <ErrorMsgStyled name="email" component="div" />
         </label>
         <label>
           Password
-          <Field
+          <FieldStyled
             type="password"
             name="password"
             placeholder="minimum 8 symbols"
           />
-          <ErrorMessage name="password" component="div" />
+          <ErrorMsgStyled name="password" component="div" />
         </label>
-        <button type="submit" disabled={isLoading}>
+        <BtnForm type="submit" disabled={isLoading}>
           {isLoading ? (
             <Spinner radius={25} color={'#333'} stroke={3} visible={true} />
           ) : (
             'Register'
           )}
-        </button>
-      </Form>
+        </BtnForm>
+      </FormStyled>
     </Formik>
   );
 }

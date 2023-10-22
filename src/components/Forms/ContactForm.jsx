@@ -3,14 +3,13 @@ import Spinner from 'react-spinner-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
 import { SignupSchema } from 'helpers/submitCheck';
+import { addContact } from 'redux/contacts/operations';
 import {
-  ButtonStyled,
+  BtnForm,
   ErrorMsgStyled,
   FieldStyled,
   FormStyled,
-  LabelStyled,
-} from '..';
-import { addContact } from 'redux/contacts/operations';
+} from './Forms.styled';
 
 const initialValues = {
   name: '',
@@ -44,8 +43,8 @@ export function ContactForm() {
       onSubmit={handleSubmit}
       validationSchema={SignupSchema}
     >
-      <FormStyled>
-        <LabelStyled>
+      <FormStyled name="contact">
+        <label>
           Name
           <FieldStyled
             type="text"
@@ -53,19 +52,19 @@ export function ContactForm() {
             placeholder="Charles de Castelmore d'Artagnan"
           />
           <ErrorMsgStyled name="name" component="div" />
-        </LabelStyled>
-        <LabelStyled>
+        </label>
+        <label>
           Phone
           <FieldStyled type="tel" name="number" placeholder="Phone" />
           <ErrorMsgStyled name="number" component="div" />
-        </LabelStyled>
-        <ButtonStyled type="submit" disabled={isLoading}>
+        </label>
+        <BtnForm type="submit" disabled={isLoading}>
           {isLoading ? (
             <Spinner radius={25} color={'#333'} stroke={3} visible={true} />
           ) : (
             'Add contact'
           )}
-        </ButtonStyled>
+        </BtnForm>
       </FormStyled>
     </Formik>
   );

@@ -1,9 +1,15 @@
-import { Formik, ErrorMessage, Field, Form } from 'formik';
+import { Formik } from 'formik';
 import Spinner from 'react-spinner-material';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginSchema } from 'helpers/submitCheck';
 import { logIn } from 'redux/auth/operations';
 import { selectIsLoading } from 'redux/contacts/selectors';
+import {
+  BtnForm,
+  ErrorMsgStyled,
+  FieldStyled,
+  FormStyled,
+} from './Forms.styled';
 
 const initialValues = {
   email: '',
@@ -25,29 +31,29 @@ export function LoginForm() {
       onSubmit={handleSubmit}
       validationSchema={LoginSchema}
     >
-      <Form>
+      <FormStyled name="login">
         <label>
           Email
-          <Field type="email" name="email" placeholder="abc@email.com" />
-          <ErrorMessage name="email" component="div" />
+          <FieldStyled type="email" name="email" placeholder="abc@email.com" />
+          <ErrorMsgStyled name="email" component="div" />
         </label>
         <label>
           Password
-          <Field
+          <FieldStyled
             type="password"
             name="password"
             placeholder="at least 8 symbols"
           />
-          <ErrorMessage name="password" component="div" />
+          <ErrorMsgStyled name="password" component="div" />
         </label>
-        <button type="submit" disabled={isLoading}>
+        <BtnForm type="submit" disabled={isLoading}>
           {isLoading ? (
             <Spinner radius={25} color={'#333'} stroke={3} visible={true} />
           ) : (
             'Log in'
           )}
-        </button>
-      </Form>
+        </BtnForm>
+      </FormStyled>
     </Formik>
   );
 }

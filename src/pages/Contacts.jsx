@@ -1,13 +1,17 @@
-// import { ContactForm } from 'components/contacts/ContactForm/ContactForm';
-// import Phonebook from 'components/contacts/Phonebook/Phonebook';
+import { ContactForm } from 'components/Forms/ContactForm';
+import { Phonebook } from 'components/contacts';
+import styled from 'styled-components';
 
-import { ContactForm, Phonebook } from 'components/contacts';
-
+const PhonebookWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 export default function Contacts() {
   return (
-    <div>
+    <PhonebookWrap>
       <ContactForm />
       <Phonebook />
-    </div>
+    </PhonebookWrap>
   );
 }

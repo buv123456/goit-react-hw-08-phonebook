@@ -4,8 +4,9 @@ import { CgTrashEmpty } from 'react-icons/cg';
 import { TbUserEdit } from 'react-icons/tb';
 import Spinner from 'react-spinner-material';
 import { deleteContact } from 'redux/contacts/operations';
-import { ButtonItemStyled, EditContact, ItemInfoStyled } from '..';
+import { ButtonItemStyled, ItemInfoStyled } from '..';
 import { createPortal } from 'react-dom';
+import { EditContact } from 'components/EditContact/EditContact';
 
 export function ContactItem({ name, number, id }) {
   const dispatch = useDispatch();
@@ -51,6 +52,7 @@ export function ContactItem({ name, number, id }) {
       {isEditing &&
         createPortal(
           <EditContact
+            name="editForm"
             contact={{ name, number, id }}
             handleClose={() => setIsEditing(false)}
           />,
@@ -59,4 +61,3 @@ export function ContactItem({ name, number, id }) {
     </>
   );
 }
-export default ContactItem;

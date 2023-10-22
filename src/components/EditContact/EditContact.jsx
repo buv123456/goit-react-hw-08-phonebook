@@ -4,31 +4,13 @@ import { SignupSchema } from 'helpers/submitCheck';
 import { editContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 import {
-  ButtonStyled,
+  BtnForm,
   ErrorMsgStyled,
   FieldStyled,
   FormStyled,
-  LabelStyled,
-} from '..';
-
-const styles = {
-  container: {
-    height: '100vh',
-    width: '100vw',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ffffff9f',
-  },
-  title: {
-    fontWeight: 500,
-    fontSize: 48,
-    textAlign: 'center',
-  },
-};
+} from '../Forms/Forms.styled';
+import { ButtonClose, Wrapper } from './EditContact.styled';
+import { CgCloseO } from 'react-icons/cg';
 
 export function EditContact({
   contact: { name: savedName, number: savedNumber, id },
@@ -52,30 +34,33 @@ export function EditContact({
     }
   };
   return (
-    <div style={styles.container}>
+    <Wrapper>
       <Formik
         initialValues={{ name: savedName, number: savedNumber }}
         onSubmit={handleSubmit}
         validationSchema={SignupSchema}
       >
-        <FormStyled>
-          <h2>Editing contact {savedName}</h2>
-          <LabelStyled>
+        <FormStyled name="editContact">
+          <h3>
+            Editing contact: <span>{savedName}</span>
+          </h3>
+
+          <label>
             Name
             <FieldStyled type="text" name="name" />
             <ErrorMsgStyled name="name" component="div" />
-          </LabelStyled>
-          <LabelStyled>
+          </label>
+          <label>
             Phone
             <FieldStyled type="tel" name="number" />
             <ErrorMsgStyled name="number" component="div" />
-          </LabelStyled>
-          <ButtonStyled type="submit">Edit contact</ButtonStyled>
-          <button type="buttun" onClick={() => handleClose()}>
-            X
-          </button>
+          </label>
+          <BtnForm type="submit">Edit contact</BtnForm>
+          <ButtonClose type="button" onClick={() => handleClose()}>
+            <CgCloseO size="2em" />
+          </ButtonClose>
         </FormStyled>
       </Formik>
-    </div>
+    </Wrapper>
   );
 }
