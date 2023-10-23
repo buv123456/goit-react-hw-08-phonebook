@@ -8,8 +8,8 @@ import {
   SortBox,
   ContactItem,
 } from '..';
-import { fetchContacts } from 'redux/contacts/operations';
 import { useContact } from 'hooks/useContact';
+import { fetchContacts } from 'redux/contacts/operations';
 
 export function ContactList() {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export function ContactList() {
     <>
       <AllContactsStyled>
         {contacts.length} all contacts <br />
-        {fetchContacts.length} filtered contacts
+        {filteredContacts.length} filtered contacts
       </AllContactsStyled>
       <SortBox onCheck={handleCheck} sortBy={sortBy} />
       <ListStyled>

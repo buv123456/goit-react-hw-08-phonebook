@@ -25,7 +25,7 @@ export const register = createAsyncThunk(
       const res = await axios.post('/users/signup', credentials);
       // After successful registration, add the token to the HTTP header
       setAuthHeader(res.data.token);
-      toast.success(`Hi ${res.data.name}! You are in`);
+      toast.success(`Hi ${res.data.user.name}! You are in`);
       return res.data;
     } catch (error) {
       toast.error(
@@ -47,7 +47,7 @@ export const logIn = createAsyncThunk(
       const res = await axios.post('/users/login', credentials);
       // After successful login, add the token to the HTTP header
       setAuthHeader(res.data.token);
-      toast.success(`Hi ${res.data.name}! You are in`);
+      toast.success(`Hi ${res.data.user.name}! You are in`);
       return res.data;
     } catch (error) {
       toast.error(
@@ -97,7 +97,7 @@ export const refreshUser = createAsyncThunk(
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
       const res = await axios.get('/users/current');
-      toast.success(`Hi ${res.data.name}! You are in`);
+      toast.success(`Hi ${res.data.user.name}! You are in`);
       return res.data;
     } catch (error) {
       toast.error(
